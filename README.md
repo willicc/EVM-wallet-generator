@@ -11,7 +11,7 @@ This script automates the process of generating Ethereum wallets. Clone the repo
 
 First, you need to clone this repo: <br>
 ```
-git clone https://github.com/dante4rt/evm-wallet-generator.git
+git clone https://github.com/willicc/evm-wallet-generator.git
 ```
 
 After that, go to the folder: <br>
