@@ -14,7 +14,7 @@ function createAccountETH() {
   return { privateKey, publicKey, mnemonicKey };
 }
 
-// Main function using async IIFE (Immediately Invoked Function Expression)
+// Main function using async IIFE
 (async () => {
   try {
     // Get the total number of wallets to create from user input
@@ -35,15 +35,25 @@ function createAccountETH() {
       const theWallet = new Wallet(createWalletResult.privateKey);
 
       if (theWallet) {
-        // Append wallet details to result.txt
+        // Save full wallet info to wallet.txt (replace result.txt)
         appendFileSync(
-          './result.txt',
+          './wallet.txt',
           `Address: ${theWallet.address} | Private Key: ${createWalletResult.privateKey} | Mnemonic: ${createWalletResult.mnemonicKey}\n`
         );
-        // Display success message with the wallet address and timestamp
+        // Save address to address.txt
+        appendFileSync(
+          './address.txt',
+          `${theWallet.address}\n`
+        );
+        // Save privatekey to pvkey.txt
+        appendFileSync(
+          './pvkey.txt',
+          `${createWalletResult.privateKey}\n`
+        );
+        // Display success message
         console.log(
           chalk.green(
-            `[${moment().format('HH:mm:ss')}] => ` + 'Wallet created...! Your address: ' + theWallet.address
+            `[${moment().format('HH:mm:ss')}] => Wallet created...! Your address: ${theWallet.address}`
           )
         );
       }
@@ -51,12 +61,11 @@ function createAccountETH() {
       count--;
     }
 
-    // Display final message after creating all wallets
-    // Change the timer (3000) if you think this is too long, in milliseconds.
+    // Display final message
     setTimeout(() => {
       console.log(
         chalk.green(
-          'All wallets have been created. Check result.txt to check your results (the address, mnemonic, and private key).'
+          'All wallets have been created. Check wallet.txt, address.txt, and pvkey.txt for your results.'
         )
       );
     }, 3000);
